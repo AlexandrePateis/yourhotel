@@ -13,5 +13,5 @@ public class PaymentMethod
 
     //Porpriedade de navegação
 
-    public Booking Booking { get; set; }
+    public List<Booking> Bookings { get; set; }
 }

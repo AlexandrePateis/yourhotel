@@ -17,18 +17,18 @@ public class Booking
     [Required]
     [Column(TypeName = "decimal(13,2)")]
     public decimal ReservationValue { get; set; }
-    public DateTime CheckInDate { get; set; }
-    public DateTime CheckOutDate { get; set; }
+    public DateTime? CheckInDate { get; set; }
+    public DateTime? CheckOutDate { get; set; }
     [Required]
     public DateTime PaymentDate { get; set; }
 
     //Propriedades de navegações
-    public List<Client> Clients { get; set; }
-    public List<PaymentMethod> PaymentMethods { get; set; }
+    public Client Client { get; set; }
+    public PaymentMethod PaymentMethod { get; set; }
     public List<Room> Rooms { get; set; }
 
     //Chave Estrangeira
-    public int ClientsId { get; set; }
-    public int PaymentMethodsId { get; set; }
+    public int ClientId { get; set; }
+    public int PaymentMethodId { get; set; }
  
 }

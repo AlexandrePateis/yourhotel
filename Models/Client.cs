@@ -11,8 +11,7 @@ public class Client
     [Required]
     public string Name { get; set; }
     [Column(TypeName = "varchar(80)")]
-    [Required]
-    public string Email { get; set; }
+    public string? Email { get; set; }
     [Column(TypeName = "varchar(20)")]
     [Required]
     public string PhoneNumber { get; set; }
@@ -23,5 +22,5 @@ public class Client
     public DateTime BirthDate { get; set; }
 
     //Propriedade de navegação
-    public Booking Booking { get; set; }
+    public List<Booking> Bookings { get; set; }
 }
