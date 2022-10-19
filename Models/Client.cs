@@ -7,11 +7,14 @@ public class Client
 {   
     [Required]
     public int Id { get; set; }
+
     [Column(TypeName = "varchar(50)")]
     [Required]
     public string Name { get; set; }
+
     [Column(TypeName = "varchar(80)")]
     public string? Email { get; set; }
+    
     [Column(TypeName = "varchar(20)")]
     [Required]
     public string PhoneNumber { get; set; }
