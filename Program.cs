@@ -1,11 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using YourHotel.Data;
+using YourHotel.Repository;
 using YourHotel.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ClientService>();
+builder.Services.AddScoped<ClientRepository>();
 //Adicionando a minha classe de contexto na API
 //Tem que acrescentar using Microsoft.EntityFrameworkCore;
 //using using IFBeaty.Data;

@@ -8,6 +8,7 @@ namespace YourHotel.Controllers;
 [Route("client")]
 public class ClientController : ControllerBase
 {
+    //Campo injetado no construtor
     private ClientService _clientService;
 
     //injetando o serviço no construtor
