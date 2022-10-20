@@ -11,10 +11,35 @@ public class ClientRepository
     {
         _context = contexto;
     }
-    public void CreateClient(Client client)
+    public Client CreateClient(Client client)
     {
         //Recebe do serviço e salva no banco de dados
         _context.Clients.Add(client);
+        _context.SaveChanges();
+
+        //retorna o modelo
+        return client;
+    }
+
+    public List<Client> ListClient()
+    {
+        return _context.Clients.ToList();
+    }
+
+    public Client SearchById(int id)
+    {
+        //Busca o client por id especifico
+        return _context.Clients.FirstOrDefault(client => client.Id == id);
+    }
+
+    public void RomeveClient(Client client)
+    {
+        _context.Remove(client);
+        _context.SaveChanges();
+    }
+
+    public void UpdateClient()
+    {
         _context.SaveChanges();
     }
 }
