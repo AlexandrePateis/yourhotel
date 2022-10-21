@@ -6,6 +6,9 @@ using YourHotel.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+#region [Cors]
+builder.Services.AddCors();
+#endregion
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<ClientRepository>();
 //Adicionando a minha classe de contexto na API
@@ -36,6 +39,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+#region 
+app.UseCors(c=>{
+  c.AllowAnyHeader();
+  c.AllowAnyMethod();
+  c.AllowAnyOrigin();
+});
+#endregion
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

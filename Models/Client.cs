@@ -24,6 +24,6 @@ public class Client
     [Required]
     public DateTime BirthDate { get; set; }
 
-    //Propriedade de navegação
+    //Propriedade de navegaçãoç
     public List<Booking> Bookings { get; set; }
 }
