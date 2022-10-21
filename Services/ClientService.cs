@@ -53,7 +53,10 @@ public class ClientService
     {
         var clientResponse = new ClientResponse();
         clientResponse.Id = model.Id;
-        clientResponse.Name = model.Name;
+        clientResponse.FirstName = model.FirstName;
+        clientResponse.LastName = model.LastName;
+        clientResponse.State = model.State;
+        clientResponse.City = model.City;
         clientResponse.Email = model.Email;
         clientResponse.Cpf = model.Cpf;
         clientResponse.BirthDate = model.BirthDate;
@@ -109,7 +112,10 @@ public class ClientService
 
     private void ConvertReqToModel(ClientCreateUpdateRequest request, Client model)
     {
-        model.Name = request.Name;
+        model.FirstName = request.FirstName;
+        model.LastName = request.LastName;
+        model.State = request.State;
+        model.City = request.City;
         model.Email = request.Email;
         model.Cpf = request.Cpf;
         model.PhoneNumber = request.PhoneNumber;

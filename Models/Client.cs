@@ -10,7 +10,18 @@ public class Client
 
     [Column(TypeName = "varchar(50)")]
     [Required]
-    public string Name { get; set; }
+    public string FirstName { get; set; }
+
+    [Column(TypeName = "varchar(50)")]
+    [Required]
+    public string LastName { get; set; }
+    [Column(TypeName = "varchar(50)")]
+    [Required]
+    public string State { get; set; }
+
+    [Column(TypeName = "varchar(50)")]
+    [Required]
+    public string City { get; set; }
 
     [Column(TypeName = "varchar(80)")]
     public string? Email { get; set; }
@@ -24,6 +35,6 @@ public class Client
     [Required]
     public DateTime BirthDate { get; set; }
 
-    //Propriedade de navegaçãoç
+    //Propriedade de navegação
     public List<Booking> Bookings { get; set; }
 }
