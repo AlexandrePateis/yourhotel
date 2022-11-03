@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using YourHotel.Dtos.Client;
 using YourHotel.Models;
 using YourHotel.Repository;
+using Mapster;
 
 namespace YourHotel.Services;
 
@@ -16,8 +17,7 @@ public class ClientService
     public ClientResponse CreateClient(ClientCreateUpdateRequest newClient)
     {
         //Copiar os dados da req para o modelo
-        var client = new Client();
-        ConvertReqToModel(newClient, client);
+        var client = newClient.Adapt<Client>();
 
         //Regras de négocio para criação de cliente
 
@@ -25,7 +25,7 @@ public class ClientService
         _clientRepository.CreateClient(client);
 
         //copiar os dados do modelo para a resposta
-        var clientResponse = ConvertModelToResponse(client);
+        var clientResponse = client.Adapt<ClientResponse>();
 
         return clientResponse;
 
@@ -36,53 +36,27 @@ public class ClientService
         //Busca os clietes no repositório
         var clients = _clientRepository.ListClient();
 
-        //Lista de clientesResponse
-        List<ClientResponse> clientResponses = new();
 
-        foreach(var client in clients )
-        {
-            //Copiar os dados do modelo para a resposta
-            var clientResponse = ConvertModelToResponse(client);
-            clientResponses.Add(clientResponse);
-        }
+        var clientResponses = clients.Adapt<List<ClientResponse>>();
+
 
         return clientResponses;
     }
 
-    private ClientResponse ConvertModelToResponse(Client model)
-    {
-        var clientResponse = new ClientResponse();
-        clientResponse.Id = model.Id;
-        clientResponse.FirstName = model.FirstName;
-        clientResponse.LastName = model.LastName;
-        clientResponse.State = model.State;
-        clientResponse.City = model.City;
-        clientResponse.Email = model.Email;
-        clientResponse.Cpf = model.Cpf;
-        clientResponse.BirthDate = model.BirthDate;
-        clientResponse.PhoneNumber = model.PhoneNumber;
-
-        return clientResponse;
-    }
 
     public ClientResponse SearchClintById(int id)
     {
         //Buscar do repositorio pelo Id
-        var client = _clientRepository.SearchById(id);
+        var client = ShareForId(id, false);
 
         //Copiar do modelo para a resposta
-        return ConvertModelToResponse(client);
+        return client.Adapt<ClientResponse>();
     }
 
     public void RemoveCliente(int id)
     {
         //buscar pelo id
-        var client = _clientRepository.SearchById(id);
-
-        if(client is null)
-        {
-            return;
-        }
+        var client = ShareForId(id);
 
         //Mandar o repositorio remover
         _clientRepository.RomeveClient(client);
@@ -100,25 +74,28 @@ public class ClientService
         }
 
         //Copiar os dados da req para o modelo
-        ConvertReqToModel(clientEdited, client);
+       //ConvertReqToModel(clientEdited, client);
+       clientEdited.Adapt(client);
 
         //mandando o repositorio atualizar
         _clientRepository.UpdateClient();
 
         //retornando resposta/
-        return ConvertModelToResponse(client);
+        return client.Adapt<ClientResponse>();
 
     }
 
-    private void ConvertReqToModel(ClientCreateUpdateRequest request, Client model)
+  
+
+    private Client ShareForId(int id, bool tracking = true)
     {
-        model.FirstName = request.FirstName;
-        model.LastName = request.LastName;
-        model.State = request.State;
-        model.City = request.City;
-        model.Email = request.Email;
-        model.Cpf = request.Cpf;
-        model.PhoneNumber = request.PhoneNumber;
-        model.BirthDate = request.BirthDate;
+        var client = _clientRepository.SearchById(id, tracking);
+
+        if(client is null)
+        {
+            throw new Exception("Client not found");
+        }
+
+        return client;
     }
 }

@@ -18,35 +18,68 @@ public class ClientController : ControllerBase
     }
 
     [HttpPost]
-    public ClientResponse PostClient([FromBody] ClientCreateUpdateRequest newClient)
+    public ActionResult<ClientResponse>  PostClient([FromBody] ClientCreateUpdateRequest newClient)
     {
+
+        var clientResponse = _clientService.CreateClient(newClient);
+
         //Enviar para a classe serviço os dados da requisição
-        return _clientService.CreateClient(newClient);
+        return CreatedAtAction(nameof(GetClients), new{id = clientResponse.Id }, clientResponse);
 
     }
     
     [HttpGet]
-    public List<ClientResponse> GetClients()
+    public ActionResult<List<ClientResponse>> GetClients()
     {
-        return _clientService.ListClient();
+        return Ok(_clientService.ListClient());
     }
 
     [HttpGet("{id:int}")]
-    public ClientResponse GetClient([FromRoute] int id)
+    public ActionResult<ClientResponse> GetClient([FromRoute] int id)
     {
-        //manda para o serviçoo buscar pelo ID
-        return _clientService.SearchClintById(id);
+        try
+        {
+            //manda para o serviçoo buscar pelo ID
+            return Ok(_clientService.SearchClintById(id));
+        }
+        catch(Exception e)
+        {
+            return NotFound(e.Message);
+        }
+        
     }
 
     [HttpDelete("{id:int}")]
-    public void DeleteClient([FromRoute] int id)
+    public ActionResult DeleteClient([FromRoute] int id)
     {
-        _clientService.RemoveCliente(id);
+
+        try
+        {
+            _clientService.RemoveCliente(id);
+
+            return NoContent();
+
+        }
+        catch(Exception e)
+        {
+            return NotFound(e.Message);
+        }
+
     }
 
     [HttpPut("{id:int}")]
-    public ClientResponse PutClient([FromRoute] int id, [FromBody] ClientCreateUpdateRequest clientEdited)
+    public ActionResult<ClientResponse> PutClient([FromRoute] int id, [FromBody] ClientCreateUpdateRequest clientEdited)
     {
-        return _clientService.UpdateClient(id, clientEdited);
+
+        try
+        {
+            return Ok( _clientService.UpdateClient(id, clientEdited));
+        }
+        catch(Exception e)
+        {
+            return NotFound(e.Message);
+        }
+ 
+        
     }
 }

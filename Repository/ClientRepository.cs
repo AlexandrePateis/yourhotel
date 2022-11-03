@@ -2,6 +2,7 @@ using YourHotel.Data;
 using Microsoft.AspNetCore.Mvc;
 using YourHotel.Models;
 namespace YourHotel.Repository;
+using Microsoft.EntityFrameworkCore;
 
 public class ClientRepository
 {
@@ -23,13 +24,22 @@ public class ClientRepository
 
     public List<Client> ListClient()
     {
-        return _context.Clients.ToList();
+        return _context.Clients.AsNoTracking().ToList();
     }
 
-    public Client SearchById(int id)
+    public Client SearchById(int id, bool tracking = true)
     {
-        //Busca o client por id especifico
-        return _context.Clients.FirstOrDefault(client => client.Id == id);
+        if(tracking)
+        {
+            //Busca o client por id especifico
+            return _context.Clients.FirstOrDefault(client => client.Id == id);
+        }
+        else
+        {
+            //Busca o client por id especifico
+            return _context.Clients.AsNoTracking().FirstOrDefault(client => client.Id == id);
+        }
+        
     }
 
     public void RomeveClient(Client client)

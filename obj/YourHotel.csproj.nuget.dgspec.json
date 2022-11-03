@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj": {}
+    "c:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj": {
+    "c:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj",
+        "projectUniqueName": "c:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj",
         "projectName": "YourHotel",
-        "projectPath": "C:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj",
+        "projectPath": "c:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\YourHotel.csproj",
         "packagesPath": "C:\\Users\\Alexandre\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\obj\\",
+        "outputPath": "c:\\Users\\Alexandre\\Desktop\\yourhotel\\YourHotel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Alexandre\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.3.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.9, )"
