@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace YourHotel.Models;
 
 public class Booking
@@ -9,7 +8,7 @@ public class Booking
     public int Id { get; set; }
     [Required]
     [Column(TypeName = "decimal(13,2)")]
-    public decimal Discount { get; set; }
+    public decimal? Discount { get; set; }
     [Required]
     public DateTime ReservationDate { get; set; }
     [Required]
@@ -21,7 +20,6 @@ public class Booking
     public DateTime? CheckOutDate { get; set; }
     [Required]
     public DateTime PaymentDate { get; set; }
-
     //Propriedades de navegações
     public Client Client { get; set; }
     public PaymentMethod PaymentMethod { get; set; }
@@ -30,5 +28,4 @@ public class Booking
     //Chave Estrangeira
     public int ClientId { get; set; }
     public int PaymentMethodId { get; set; }
- 
 }

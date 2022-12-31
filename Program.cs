@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using YouHotel.Repository;
+using yourhotel.Repository;
 using YourHotel.Data;
 using YourHotel.Repository;
 using YourHotel.Services;
@@ -9,11 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 #region [Cors]
 builder.Services.AddCors();
 #endregion
+
 builder.Services.AddScoped<ClientService>();
 builder.Services.AddScoped<ClientRepository>();
-//Adicionando a minha classe de contexto na API
-//Tem que acrescentar using Microsoft.EntityFrameworkCore;
-//using using IFBeaty.Data;
+builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<BookingRepository>();
+builder.Services.AddScoped<PaymentMethodService>();
+builder.Services.AddScoped<PaymentMethodRepository>();
+builder.Services.AddScoped<RoomTypeService>();
+builder.Services.AddScoped<RoomTypeRepository>();
+builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<RoomRepository>();
+
 builder.Services.AddDbContext<ContextBD>(
   options =>
   //Dizendo que vamos usar o MySQL
@@ -40,10 +49,11 @@ if (app.Environment.IsDevelopment())
 }
 
 #region 
-app.UseCors(c=>{
-  c.AllowAnyHeader();
-  c.AllowAnyMethod();
-  c.AllowAnyOrigin();
+app.UseCors(c =>
+{
+    c.AllowAnyHeader();
+    c.AllowAnyMethod();
+    c.AllowAnyOrigin();
 });
 #endregion
 app.UseHttpsRedirection();

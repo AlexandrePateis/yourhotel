@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YourHotel.Models;
 
-public class TypeRoom
+public class RoomType
 {
     [Required]
     public int Id { get; set; }

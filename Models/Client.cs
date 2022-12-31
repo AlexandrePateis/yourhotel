@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace YourHotel.Models;
 
 public class Client
-{   
+{
     [Required]
     public int Id { get; set; }
 
@@ -25,7 +25,7 @@ public class Client
 
     [Column(TypeName = "varchar(80)")]
     public string? Email { get; set; }
-    
+
     [Column(TypeName = "varchar(20)")]
     [Required]
     public string PhoneNumber { get; set; }

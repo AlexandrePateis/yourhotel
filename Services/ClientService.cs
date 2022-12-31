@@ -43,7 +43,6 @@ public class ClientService
         return clientResponses;
     }
 
-
     public ClientResponse SearchClintById(int id)
     {
         //Buscar do repositorio pelo Id
@@ -68,14 +67,14 @@ public class ClientService
 
         var client = _clientRepository.SearchById(id);
 
-        if(client is null)
+        if (client is null)
         {
             return null;
         }
 
         //Copiar os dados da req para o modelo
-       //ConvertReqToModel(clientEdited, client);
-       clientEdited.Adapt(client);
+        //ConvertReqToModel(clientEdited, client);
+        clientEdited.Adapt(client);
 
         //mandando o repositorio atualizar
         _clientRepository.UpdateClient();
@@ -85,13 +84,13 @@ public class ClientService
 
     }
 
-  
+
 
     private Client ShareForId(int id, bool tracking = true)
     {
         var client = _clientRepository.SearchById(id, tracking);
 
-        if(client is null)
+        if (client is null)
         {
             throw new Exception("Client not found");
         }

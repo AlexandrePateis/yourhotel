@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using YourHotel.Models;
-
 namespace YourHotel.Data;
 
 public class ContextBD : DbContext
@@ -13,9 +12,9 @@ public class ContextBD : DbContext
     }
 
     //Tabelas do BD
-    public DbSet<Booking> Bookings{ get; set; }
-    public DbSet<Client> Clients{ get; set; }
-    public DbSet<PaymentMethod> PaymentMethods{ get; set; }
-    public DbSet<Room> Rooms{ get; set; }
-    public DbSet<TypeRoom> TypeRooms{ get; set; }
+    public DbSet<Booking> Bookings { get; set; }
+    public DbSet<Client> Clients { get; set; }
+    public DbSet<PaymentMethod> PaymentMethods { get; set; }
+    public DbSet<Room> Rooms { get; set; }
+    public DbSet<RoomType> RoomType { get; set; }
 }

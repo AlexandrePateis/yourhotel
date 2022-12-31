@@ -18,16 +18,15 @@ public class ClientController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<ClientResponse>  PostClient([FromBody] ClientCreateUpdateRequest newClient)
+    public ActionResult<ClientResponse> PostClient([FromBody] ClientCreateUpdateRequest newClient)
     {
-
         var clientResponse = _clientService.CreateClient(newClient);
 
         //Enviar para a classe serviço os dados da requisição
-        return CreatedAtAction(nameof(GetClients), new{id = clientResponse.Id }, clientResponse);
+        return CreatedAtAction(nameof(GetClients), new { id = clientResponse.Id }, clientResponse);
 
     }
-    
+
     [HttpGet]
     public ActionResult<List<ClientResponse>> GetClients()
     {
@@ -42,25 +41,22 @@ public class ClientController : ControllerBase
             //manda para o serviçoo buscar pelo ID
             return Ok(_clientService.SearchClintById(id));
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return NotFound(e.Message);
         }
-        
+
     }
 
     [HttpDelete("{id:int}")]
     public ActionResult DeleteClient([FromRoute] int id)
     {
-
         try
         {
             _clientService.RemoveCliente(id);
-
             return NoContent();
-
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return NotFound(e.Message);
         }
@@ -73,13 +69,13 @@ public class ClientController : ControllerBase
 
         try
         {
-            return Ok( _clientService.UpdateClient(id, clientEdited));
+            return Ok(_clientService.UpdateClient(id, clientEdited));
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return NotFound(e.Message);
         }
- 
-        
+
+
     }
 }

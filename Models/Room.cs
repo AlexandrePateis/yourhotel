@@ -10,14 +10,14 @@ public class Room
     [Required]
     public bool Reserved { get; set; }
     [Required]
-    [Column(TypeName ="decimal(13,2)")]
+    [Column(TypeName = "decimal(13,2)")]
     public decimal Price { get; set; }
 
     // Chave de Navegação
-    public TypeRoom TypeRoom { get; set; }
+    public RoomType RoomType { get; set; }
     public List<Booking> Bookings { get; set; }
 
     //Chave Estrangeira
 
-    public int TypeRoomId { get; set; }
+    public int RoomTypeId { get; set; }
 }

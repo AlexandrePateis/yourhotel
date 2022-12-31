@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YourHotel.Data;
 
@@ -10,9 +11,10 @@ using YourHotel.Data;
 namespace YourHotel.Migrations
 {
     [DbContext(typeof(ContextBD))]
-    partial class ContextBDModelSnapshot : ModelSnapshot
+    [Migration("20221231065336_NomeDaMigracao")]
+    partial class NomeDaMigracao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -145,17 +147,17 @@ namespace YourHotel.Migrations
                     b.Property<bool>("Reserved")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("RoomTypeId")
+                    b.Property<int>("TypeRoomId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoomTypeId");
+                    b.HasIndex("TypeRoomId");
 
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("YourHotel.Models.RoomType", b =>
+            modelBuilder.Entity("YourHotel.Models.TypeRoom", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -170,7 +172,7 @@ namespace YourHotel.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RoomType");
+                    b.ToTable("TypeRooms");
                 });
 
             modelBuilder.Entity("BookingRoom", b =>
@@ -209,13 +211,13 @@ namespace YourHotel.Migrations
 
             modelBuilder.Entity("YourHotel.Models.Room", b =>
                 {
-                    b.HasOne("YourHotel.Models.RoomType", "RoomType")
+                    b.HasOne("YourHotel.Models.TypeRoom", "TypeRoom")
                         .WithMany("Rooms")
-                        .HasForeignKey("RoomTypeId")
+                        .HasForeignKey("TypeRoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("RoomType");
+                    b.Navigation("TypeRoom");
                 });
 
             modelBuilder.Entity("YourHotel.Models.Client", b =>
@@ -228,7 +230,7 @@ namespace YourHotel.Migrations
                     b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("YourHotel.Models.RoomType", b =>
+            modelBuilder.Entity("YourHotel.Models.TypeRoom", b =>
                 {
                     b.Navigation("Rooms");
                 });
