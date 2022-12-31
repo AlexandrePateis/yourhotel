@@ -13,7 +13,7 @@ public class Room
     [Column(TypeName = "decimal(13,2)")]
     public decimal Price { get; set; }
 
-    // Chave de Navegação
+    // Chave de Navegação (Associação)
     public RoomType RoomType { get; set; }
     public List<Booking> Bookings { get; set; }
 

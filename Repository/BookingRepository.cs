@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using YourHotel.Data;
 using YourHotel.Models;
 
@@ -17,5 +18,35 @@ public class BookingRepository
         _context.Bookings.Add(booking);
         _context.SaveChanges();
         return booking;
+    }
+
+    public List<Booking> GetBookings()
+    {
+        return _context.Bookings.AsNoTracking().ToList();
+    }
+
+    public Booking GetBooking(int id, bool tracking = true)
+    {
+        if (tracking)
+        {
+            return _context.Bookings.FirstOrDefault(booking => booking.Id == id);
+        }
+        else
+        {
+            return _context.Bookings.AsNoTracking().FirstOrDefault(booking => booking.Id == id);
+        }
+    }
+
+    public bool DeleteBooking(Booking booking)
+    {
+        _context.Bookings.Remove(booking);
+        _context.SaveChanges();
+        return true;
+    }
+
+    public void PutBooking()
+    {
+        _context.SaveChanges();
+
     }
 }

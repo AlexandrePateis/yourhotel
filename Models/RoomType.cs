@@ -13,7 +13,6 @@ public class RoomType
     [Required]
     public int Capacity { get; set; }
 
-    // Propriedade de navegação
-
+    // Propriedade de navegação (Associação)
     public List<Room> Rooms { get; set; }
 }

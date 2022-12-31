@@ -11,8 +11,7 @@ public class Booking
     public decimal? Discount { get; set; }
     [Required]
     public DateTime ReservationDate { get; set; }
-    [Required]
-    public DateTime ReservationFinalDate { get; set; }
+
     [Required]
     [Column(TypeName = "decimal(13,2)")]
     public decimal ReservationValue { get; set; }
@@ -20,6 +19,7 @@ public class Booking
     public DateTime? CheckOutDate { get; set; }
     [Required]
     public DateTime PaymentDate { get; set; }
+
     //Propriedades de navegações
     public Client Client { get; set; }
     public PaymentMethod PaymentMethod { get; set; }

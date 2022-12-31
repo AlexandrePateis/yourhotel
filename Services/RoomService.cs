@@ -18,60 +18,67 @@ public class RoomService
     {
         var roomModel = roomRequestDTO.Adapt<Room>();
         var responseModel = _roomRepository.PostRoom(roomModel);
-        var roomResponse = responseModel.Adapt<RoomResponseDTO>();
-        return roomResponse;
+        var roomResponseDTO = responseModel.Adapt<RoomResponseDTO>();
+        return roomResponseDTO;
     }
 
-    // public List<RoomTypeResponseDTO> GetRoomTypes()
-    // {
-    //     List<RoomType> roomTypes = _roomTypeRepository.GetRoomTypes();
-    //     var roomTypeResponse = roomTypes.Adapt<List<RoomTypeResponseDTO>>();
-    //     return roomTypeResponse;
-    // }
+    public List<RoomResponseDTO> GetRooms()
+    {
+        List<Room> roomList = _roomRepository.GetRooms();
+        var roomListResponse = roomList.Adapt<List<RoomResponseDTO>>();
+        return roomListResponse;
+    }
 
-    // public RoomTypeResponseDTO GetRoomType(int id)
-    // {
-    //     var responseModel = _roomTypeRepository.GetRoomType(id, false);
-    //     return responseModel.Adapt<RoomTypeResponseDTO>();
-    // }
+    public RoomResponseDTO GetRoom(int id)
+    {
+        var responseModel = _roomRepository.GetRoom(id, false);
+        if (responseModel == null)
+        {
+            throw new Exception("Room not found in the database!");
+        }
+        return responseModel.Adapt<RoomResponseDTO>();
+    }
 
-    // public bool DeleteRoomType(int id)
-    // {
-    //     try
-    //     {
-    //         var roomType = GetRoomTypeById(id);
-    //         _roomTypeRepository.DeleteRoomType(roomType);
-    //         return true;
-    //     }
-    //     catch (Exception)
-    //     {
-    //         return false;
-    //     }
-    // }
+    public bool DeleteRoom(int id)
+    {
+        try
+        {
+            var room = GetRoomById(id);
+            if (room == null)
+            {
+                throw new Exception("Room not found in the database!");
+            }
+            _roomRepository.DeleteRoom(room);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
 
-    // public RoomTypeResponseDTO PutRoomType(int id, RoomTypeRequestDTO roomTypeRequestDTO)
-    // {
-    //     var roomType = GetRoomTypeById(id);
+    public RoomResponseDTO PutRoom(int id, RoomRequestDTO roomRequestDTO)
+    {
+        var roomType = GetRoomById(id);
 
-    //     if (roomType is null)
-    //     {
-    //         return null;
-    //     }
-    //     roomTypeRequestDTO.Adapt(roomType);
-    //     _roomTypeRepository.PutRoomType();
-    //     return roomType.Adapt<RoomTypeResponseDTO>();
+        if (roomType is null)
+        {
+            return null;
+        }
+        roomRequestDTO.Adapt(roomType);
+        _roomRepository.PutRoom();
+        return roomType.Adapt<RoomResponseDTO>();
+    }
 
-    // }
-
-    // //Methods
-    // private RoomType GetRoomTypeById(int id, bool tracking = true)
-    // {
-    //     var roomType = _roomTypeRepository.GetRoomType(id, tracking);
-    //     if (roomType is null)
-    //     {
-    //         throw new Exception();
-    //     }
-    //     return roomType;
-    // }
+    //Methods
+    private Room GetRoomById(int id, bool tracking = true)
+    {
+        var room = _roomRepository.GetRoom(id, tracking);
+        if (room is null)
+        {
+            throw new Exception();
+        }
+        return room;
+    }
 }
 

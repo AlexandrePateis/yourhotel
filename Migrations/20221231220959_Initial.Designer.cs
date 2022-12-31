@@ -11,8 +11,8 @@ using YourHotel.Data;
 namespace YourHotel.Migrations
 {
     [DbContext(typeof(ContextBD))]
-    [Migration("20221002183346_ChavesConfiguradas")]
-    partial class ChavesConfiguradas
+    [Migration("20221231220959_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,34 +42,36 @@ namespace YourHotel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CheckInDate")
+                    b.Property<DateTime?>("CheckInDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("CheckOutDate")
+                    b.Property<DateTime?>("CheckOutDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("ClientsId")
+                    b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Discount")
+                    b.Property<decimal?>("Discount")
+                        .IsRequired()
                         .HasColumnType("decimal(13,2)");
 
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("PaymentMethodsId")
+                    b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ReservationDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("ReservationFinalDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<decimal>("ReservationValue")
                         .HasColumnType("decimal(13,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("PaymentMethodId");
 
                     b.ToTable("Bookings");
                 });
@@ -83,18 +85,22 @@ namespace YourHotel.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("int");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Cpf")
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("varchar(80)");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
@@ -102,9 +108,11 @@ namespace YourHotel.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(20)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("varchar(50)");
 
-                    b.HasIndex("BookingId");
+                    b.HasKey("Id");
 
                     b.ToTable("Clients");
                 });
@@ -115,16 +123,11 @@ namespace YourHotel.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("BookingId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BookingId");
 
                     b.ToTable("PaymentMethods");
                 });
@@ -141,17 +144,17 @@ namespace YourHotel.Migrations
                     b.Property<bool>("Reserved")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<int>("TypeRoomId")
+                    b.Property<int>("RoomTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TypeRoomId");
+                    b.HasIndex("RoomTypeId");
 
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("YourHotel.Models.TypeRoom", b =>
+            modelBuilder.Entity("YourHotel.Models.RoomType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,7 +169,7 @@ namespace YourHotel.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TypeRooms");
+                    b.ToTable("RoomType");
                 });
 
             modelBuilder.Entity("BookingRoom", b =>
@@ -184,43 +187,47 @@ namespace YourHotel.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("YourHotel.Models.Client", b =>
+            modelBuilder.Entity("YourHotel.Models.Booking", b =>
                 {
-                    b.HasOne("YourHotel.Models.Booking", "Booking")
-                        .WithMany("Clients")
-                        .HasForeignKey("BookingId");
+                    b.HasOne("YourHotel.Models.Client", "Client")
+                        .WithMany("Bookings")
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Booking");
-                });
+                    b.HasOne("YourHotel.Models.PaymentMethod", "PaymentMethod")
+                        .WithMany("Bookings")
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("YourHotel.Models.PaymentMethod", b =>
-                {
-                    b.HasOne("YourHotel.Models.Booking", "Booking")
-                        .WithMany("PaymentMethods")
-                        .HasForeignKey("BookingId");
+                    b.Navigation("Client");
 
-                    b.Navigation("Booking");
+                    b.Navigation("PaymentMethod");
                 });
 
             modelBuilder.Entity("YourHotel.Models.Room", b =>
                 {
-                    b.HasOne("YourHotel.Models.TypeRoom", "TypeRoom")
+                    b.HasOne("YourHotel.Models.RoomType", "RoomType")
                         .WithMany("Rooms")
-                        .HasForeignKey("TypeRoomId")
+                        .HasForeignKey("RoomTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TypeRoom");
+                    b.Navigation("RoomType");
                 });
 
-            modelBuilder.Entity("YourHotel.Models.Booking", b =>
+            modelBuilder.Entity("YourHotel.Models.Client", b =>
                 {
-                    b.Navigation("Clients");
-
-                    b.Navigation("PaymentMethods");
+                    b.Navigation("Bookings");
                 });
 
-            modelBuilder.Entity("YourHotel.Models.TypeRoom", b =>
+            modelBuilder.Entity("YourHotel.Models.PaymentMethod", b =>
+                {
+                    b.Navigation("Bookings");
+                });
+
+            modelBuilder.Entity("YourHotel.Models.RoomType", b =>
                 {
                     b.Navigation("Rooms");
                 });

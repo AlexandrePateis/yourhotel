@@ -10,7 +10,6 @@ public class ContextBD : DbContext
     {
 
     }
-
     //Tabelas do BD
     public DbSet<Booking> Bookings { get; set; }
     public DbSet<Client> Clients { get; set; }

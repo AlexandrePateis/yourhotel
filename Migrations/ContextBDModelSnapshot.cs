@@ -62,9 +62,6 @@ namespace YourHotel.Migrations
                     b.Property<DateTime>("ReservationDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime>("ReservationFinalDate")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<decimal>("ReservationValue")
                         .HasColumnType("decimal(13,2)");
 

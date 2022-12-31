@@ -19,32 +19,32 @@ public class RoomRepository
         return roomModel;
     }
 
-    // public List<RoomType> GetRoomTypes()
-    // {
-    //     return _context.RoomType.AsNoTracking().ToList();
-    // }
+    public List<Room> GetRooms()
+    {
+        return _context.Rooms.AsNoTracking().ToList();
+    }
 
-    // public RoomType GetRoomType(int id, bool tracking = true)
-    // {
-    //     if (tracking)
-    //     {
-    //         return _context.RoomType.FirstOrDefault(item => item.Id == id);
-    //     }
-    //     else
-    //     {
-    //         return _context.RoomType.AsNoTracking().FirstOrDefault(item => item.Id == id);
-    //     }
-    // }
+    public Room GetRoom(int id, bool tracking = true)
+    {
+        if (tracking)
+        {
+            return _context.Rooms.FirstOrDefault(item => item.Id == id);
+        }
+        else
+        {
+            return _context.Rooms.AsNoTracking().FirstOrDefault(item => item.Id == id);
+        }
+    }
 
-    // public bool DeleteRoomType(RoomType roomType)
-    // {
-    //     _context.RoomType.Remove(roomType);
-    //     _context.SaveChanges();
-    //     return true;
-    // }
+    public bool DeleteRoom(Room room)
+    {
+        _context.Rooms.Remove(room);
+        _context.SaveChanges();
+        return true;
+    }
 
-    // public void PutRoomType()
-    // {
-    //     _context.SaveChanges();
-    // }
+    public void PutRoom()
+    {
+        _context.SaveChanges();
+    }
 }
