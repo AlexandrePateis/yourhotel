@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using yourhotel.Dtos.PaymentMethod;
 using YourHotel.Dtos.Client;
@@ -6,6 +7,7 @@ using YourHotel.Services;
 namespace YourHotel.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("payment")]
 public class PaymentMethodController : ControllerBase
 {

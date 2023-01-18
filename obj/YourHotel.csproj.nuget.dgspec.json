@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro\\Área de Trabalho\\dev\\react\\yourhotel\\YourHotel.csproj": {}
+    "C:\\Users\\pedro\\Área de Trabalho\\dev\\c#\\YourHotel\\YourHotel.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro\\Área de Trabalho\\dev\\react\\yourhotel\\YourHotel.csproj": {
+    "C:\\Users\\pedro\\Área de Trabalho\\dev\\c#\\YourHotel\\YourHotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro\\Área de Trabalho\\dev\\react\\yourhotel\\YourHotel.csproj",
+        "projectUniqueName": "C:\\Users\\pedro\\Área de Trabalho\\dev\\c#\\YourHotel\\YourHotel.csproj",
         "projectName": "YourHotel",
-        "projectPath": "C:\\Users\\pedro\\Área de Trabalho\\dev\\react\\yourhotel\\YourHotel.csproj",
+        "projectPath": "C:\\Users\\pedro\\Área de Trabalho\\dev\\c#\\YourHotel\\YourHotel.csproj",
         "packagesPath": "C:\\Users\\pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro\\Área de Trabalho\\dev\\react\\yourhotel\\obj\\",
+        "outputPath": "C:\\Users\\pedro\\Área de Trabalho\\dev\\c#\\YourHotel\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\pedro\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,9 +38,21 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "BCrypt.Net": {
+              "target": "Package",
+              "version": "[0.1.0, )"
+            },
             "Mapster": {
               "target": "Package",
               "version": "[7.3.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.12, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

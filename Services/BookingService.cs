@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Mapster;
 using yourhotel.Dtos.Booking;
-using yourhotel.Repository;
 using YourHotel.Models;
+using YourHotel.Repository;
 
 namespace YourHotel.Services;
 
@@ -48,8 +48,20 @@ public class BookingService
 
     public BookingResponseDTO GetBooking(int id)
     {
-        var responseModel = _bookingRepository.GetBooking(id, false);
-        return responseModel.Adapt<BookingResponseDTO>();
+        try
+        {
+            var responseModel = _bookingRepository.GetBooking(id, false);
+            if (responseModel is null)
+            {
+                return null;
+            }
+            return responseModel.Adapt<BookingResponseDTO>();
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+
     }
 
 

@@ -15,7 +15,9 @@ public class ClientService
     }
     public ClientResponse CreateClient(ClientCreateUpdateRequest newClient)
     {
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(newClient.Password);
         var client = newClient.Adapt<Client>();
+        client.Password = hashedPassword;
         _clientRepository.CreateClient(client);
         var clientResponse = client.Adapt<ClientResponse>();
         return clientResponse;
@@ -37,7 +39,7 @@ public class ClientService
     public void RemoveCliente(int id)
     {
         var client = ShareForId(id);
-        _clientRepository.RomeveClient(client);
+        _clientRepository.RemoveClient(client);
     }
 
     public ClientResponse UpdateClient(int id, ClientCreateUpdateRequest clientEdited)

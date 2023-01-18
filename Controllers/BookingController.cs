@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using yourhotel.Dtos.Booking;
@@ -7,6 +8,7 @@ namespace yourhotel.Controllers.Booking;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class BookingController : ControllerBase
 {
     private BookingService _bookingService;
@@ -24,9 +26,9 @@ public class BookingController : ControllerBase
             var bookingResponseDTO = _bookingService.PostBooking(bookingRequestDTO);
             return StatusCode(201, bookingResponseDTO);
         }
-        catch (DbUpdateException)
+        catch (DbUpdateException e)
         {
-            return StatusCode(500, "There was a problem with the database");
+            return StatusCode(500, $"There was a problem with the database {e.Message}");
         }
         catch (Exception e)
         {
@@ -59,7 +61,7 @@ public class BookingController : ControllerBase
         }
         catch (Exception e)
         {
-            return StatusCode(404, "Booking not found: " + e);
+            return StatusCode(404, "Booking not found: " + e.Message);
         }
     }
 
@@ -73,7 +75,7 @@ public class BookingController : ControllerBase
         }
         catch (Exception e)
         {
-            return StatusCode(404, "Booking not found: " + e);
+            return StatusCode(404, "Booking not found: " + e.Message);
         }
     }
 

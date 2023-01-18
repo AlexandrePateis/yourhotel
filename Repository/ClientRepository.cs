@@ -29,7 +29,7 @@ public class ClientRepository
 
     public Client SearchById(int id, bool tracking = true)
     {
-        if(tracking)
+        if (tracking)
         {
             //Busca o client por id especifico
             return _context.Clients.FirstOrDefault(client => client.Id == id);
@@ -39,10 +39,11 @@ public class ClientRepository
             //Busca o client por id especifico
             return _context.Clients.AsNoTracking().FirstOrDefault(client => client.Id == id);
         }
-        
     }
 
-    public void RomeveClient(Client client)
+
+
+    public void RemoveClient(Client client)
     {
         _context.Remove(client);
         _context.SaveChanges();
@@ -51,5 +52,12 @@ public class ClientRepository
     public void UpdateClient()
     {
         _context.SaveChanges();
+    }
+
+    public Client SearchByEmail(string email)
+    {
+        return _context.Clients
+        .AsNoTracking()
+        .FirstOrDefault(client => client.Email == email);
     }
 }

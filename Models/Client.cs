@@ -23,8 +23,13 @@ public class Client
     [Required]
     public string City { get; set; }
 
-    [Column(TypeName = "varchar(80)")]
-    public string? Email { get; set; }
+    [Required]
+    [Column(TypeName = "varchar(50)")]
+    public string Email { get; set; }
+
+    [Required]
+    [Column(TypeName = "varchar(60)")]
+    public string Password { get; set; }
 
     [Column(TypeName = "varchar(20)")]
     [Required]

@@ -5,7 +5,7 @@ using YourHotel.Dtos.Room;
 namespace YourHotel.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("room")]
 public class RoomController : ControllerBase
 {
     private RoomService _roomService;

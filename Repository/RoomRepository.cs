@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YourHotel.Data;
 using YourHotel.Models;
-namespace YouHotel.Repository;
+namespace YourHotel.Repository;
 
 public class RoomRepository
 {

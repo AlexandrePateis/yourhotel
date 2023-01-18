@@ -1,9 +1,8 @@
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
-using YouHotel.Repository;
-using yourhotel.Dtos.PaymentMethod;
 using YourHotel.Dtos.RoomType;
 using YourHotel.Models;
+using YourHotel.Repository;
 
 namespace YourHotel.Services;
 

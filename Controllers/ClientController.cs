@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YourHotel.Dtos.Client;
 using YourHotel.Services;
@@ -6,6 +7,7 @@ namespace YourHotel.Controllers;
 
 [ApiController]
 [Route("client")]
+[Authorize]
 public class ClientController : ControllerBase
 {
     //Campo injetado no construtor

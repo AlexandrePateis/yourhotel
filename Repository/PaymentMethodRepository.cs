@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using YourHotel.Data;
 using YourHotel.Models;
 
-namespace yourhotel.Repository;
+namespace YourHotel.Repository;
 
 public class PaymentMethodRepository
 {
