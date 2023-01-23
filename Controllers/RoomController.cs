@@ -2,10 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using YourHotel.Services;
 using YourHotel.Dtos.Room;
+using Microsoft.AspNetCore.Authorization;
+
 namespace YourHotel.Controllers;
 
 [ApiController]
 [Route("room")]
+[Authorize]
 public class RoomController : ControllerBase
 {
     private RoomService _roomService;

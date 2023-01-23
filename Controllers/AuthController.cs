@@ -4,7 +4,6 @@ using YourHotel.Services;
 
 namespace YourHotel.Controllers;
 
-
 [ApiController]
 [Route("[controller]")]
 public class AuthController : ControllerBase
@@ -26,7 +25,7 @@ public class AuthController : ControllerBase
         }
         catch (Exception e)
         {
-            return NotFound(e.Message);
+            return StatusCode(401, $"Credenciais inválidas: {e.Message}");
         }
     }
 

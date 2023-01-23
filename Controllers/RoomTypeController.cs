@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using YourHotel.Dtos.RoomType;
 using YourHotel.Services;
@@ -5,6 +6,7 @@ namespace YourHotel.Controllers;
 
 [ApiController]
 [Route("roomtype")]
+[Authorize]
 public class RoomTypeController : ControllerBase
 {
     private RoomTypeService _roomTypeService;
